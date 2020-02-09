@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon\\Pokemon.csproj": {}
+    "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon.csproj": {}
   },
   "projects": {
-    "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon\\Pokemon.csproj": {
+    "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon\\Pokemon.csproj",
+        "projectUniqueName": "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon.csproj",
         "projectName": "Pokemon",
-        "projectPath": "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon\\Pokemon.csproj",
+        "projectPath": "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon.csproj",
         "packagesPath": "C:\\Users\\joao\\.nuget\\packages\\",
-        "outputPath": "C:\\FitBank\\DesafioPokemon\\Pokemon\\Pokemon\\obj\\",
+        "outputPath": "C:\\FitBank\\DesafioPokemon\\Pokemon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.18, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
