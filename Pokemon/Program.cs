@@ -3,6 +3,8 @@ using System.Net;
 using HtmlAgilityPack;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
+using Pokemon.Entities;
 
 namespace Pokemon
 {
@@ -10,6 +12,7 @@ namespace Pokemon
     {
         static void Main(string[] args)
         {
+            List<Card> timecarta = new List<Card>();
             /*
             string url = "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
             WebClient wc = new WebClient();
@@ -47,18 +50,30 @@ namespace Pokemon
             
 
             var wc = new WebClient();
-            string teste = "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
-            string pagina = wc.DownloadString(teste);
+            string urlPrincipal = "https://www.pokemon.com/";
+            string urlSecundaria = urlPrincipal + "us/pokemon-tcg/pokemon-cards/";
+            string seach_url = "?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
+            string url = "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
+            string pagina = wc.DownloadString(url);
 
             htmlDocument.LoadHtml(pagina);
 
             Console.WriteLine("Passou");
 
-            foreach(HtmlNode node in htmlDocument.DocumentNode.SelectNodes("//a[@href]"))
-            {
-                Console.WriteLine(node);
-            }
+            var names = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"cardResults\"]/li[2]/a/div/img");
 
+            var link2 = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"cardResults\"]/li[2]/a");
+
+            foreach (var node in names.Zip(link2, (n, d) => new Card { Nome = n.InnerText, url_imagem = d.InnerText }))
+            {
+                timecarta.Add(node);
+
+            }
+            foreach(var node in timecarta)
+            {
+                Console.WriteLine(node.ToString());
+                Console.WriteLine("Passou");
+            }
 
             /*
             var titulo = string.Empty;
