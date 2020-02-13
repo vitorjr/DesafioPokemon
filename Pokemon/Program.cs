@@ -60,19 +60,15 @@ namespace Pokemon
 
             Console.WriteLine("Passou");
 
-            var names = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"cardResults\"]/li[2]/a/div/img");
+            List<string> dataAttribute = new List<string>();
+            List<string> spanText = new List<string>();
 
-            var link2 = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"cardResults\"]/li[2]/a");
+            HtmlNodeCollection nodeCollection = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"filters\"]/section[2]/div/div///li");
 
-            foreach (var node in names.Zip(link2, (n, d) => new Card { Nome = n.InnerText, url_imagem = d.InnerText }))
+            foreach (HtmlNode node in nodeCollection)
             {
-                timecarta.Add(node);
-
-            }
-            foreach(var node in timecarta)
-            {
-                Console.WriteLine(node.ToString());
-                Console.WriteLine("Passou");
+                dataAttribute.Add(node.GetAttributeValue("data", "null"));
+                spanText.Add(node.SelectSingleNode("span").InnerText);
             }
 
             /*
