@@ -13,6 +13,11 @@ namespace Pokemon.Entities
 
         public string url_imagem { get; set; }
 
+        public Card(string url_imagem)
+        {
+            this.url_imagem = url_imagem;
+        }
+
         public override string ToString()
         {
             return "Nome: "+Nome;
