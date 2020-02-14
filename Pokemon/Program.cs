@@ -50,9 +50,7 @@ namespace Pokemon
             
 
             var wc = new WebClient();
-            string urlPrincipal = "https://www.pokemon.com/";
-            string urlSecundaria = urlPrincipal + "us/pokemon-tcg/pokemon-cards/";
-            string seach_url = "?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
+            
             string url = "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
             string pagina = wc.DownloadString(url);
 
@@ -63,12 +61,25 @@ namespace Pokemon
             List<string> dataAttribute = new List<string>();
             List<string> spanText = new List<string>();
 
-            HtmlNodeCollection nodeCollection = htmlDocument.DocumentNode.SelectNodes("//*[@id=\"filters\"]/section[2]/div/div///li");
+            
 
-            foreach (HtmlNode node in nodeCollection)
+
+            HtmlNodeCollection nodeCollection = htmlDocument.DocumentNode.SelectNodes("//div[@class='column-12 push-1 card-results-anchor']//li");
+            
+            
+
+            foreach (HtmlAgilityPack.HtmlNode node in nodeCollection)
             {
-                dataAttribute.Add(node.GetAttributeValue("data", "null"));
-                spanText.Add(node.SelectSingleNode("span").InnerText);
+                HtmlNode aux = node.SelectSingleNode("./a");
+                String temp = aux.GetAttributeValue("href", "default");
+                Console.WriteLine(aux.GetAttributeValue("href","default"));
+                HtmlNode fix = node.SelectSingleNode("./a[@href]");
+                Console.WriteLine(temp);
+                
+                //spanText = aux.GetAttributeValue("href", "default");
+
+                //dataAttribute.Add(node.SelectSingleNode("./a", ""));
+                //spanText.Add(node.SelectSingleNode("span").InnerText);
             }
 
             /*
