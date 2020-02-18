@@ -15,32 +15,12 @@ namespace Pokemon
             List<Card> timecarta = new List<Card>();
             /*
             string url = "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=";
-            WebClient wc = new WebClient();
-            string html = wc.DownloadString(url);
-            Console.WriteLine(html);
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(html);
+            
 
-            foreach(HtmlNode node in doc.DocumentNode.SelectNodes("cards-grid clear"))
-            {
-                Console.WriteLine(node.InnerText);
-            }
-            */
-            
-            
-            
-            
-            
-            
-            
-            
             /*
             Console.WriteLine("1 - Acesse o site https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/");
             Console.WriteLine("2 - Realize uma pesquisa sem preencher nenhum campo(Clicando em Search)");
             Console.WriteLine("3 - Informe abaixo a quantidade de páginas:");*/
-
-            //string url_pokemon = "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/";
-            //HtmlWeb web = new HtmlWeb();
 
             //HtmlDocument doc = web.Load(url_pokemon + "?cardName=&cardText=&evolvesFrom=&simpleSubmit=&format=unlimited&hitPointsMin=0&hitPointsMax=340&retreatCostMin=0&retreatCostMax=5&totalAttackCostMin=0&totalAttackCostMax=5&particularArtist=");
 
@@ -63,13 +43,8 @@ namespace Pokemon
             List<string> spanText = new List<string>();
             List<string> linktodo = new List<string>();
 
-
-
-
-
             HtmlNodeCollection nodeCollection = htmlDocument.DocumentNode.SelectNodes("//div[@class='column-12 push-1 card-results-anchor']//li");
-            
-            
+           
 
             foreach (HtmlAgilityPack.HtmlNode node in nodeCollection)
             {
@@ -126,11 +101,16 @@ namespace Pokemon
             List<string> image_links = new List<string>();
             document.LoadHtml(source);
 
-            foreach (HtmlNode link in document.DocumentNode.SelectNodes("//div[@class='pokemon-stats']"))
+            foreach (HtmlNode link in document.DocumentNode.SelectNodes("//div[@class=\"pokemon-stats\"]/div[@class=\"stats-footer\"]"))
             {
-                HtmlNode aux = node.SelectSingleNode("./a");
+                HtmlNode aux = link.SelectSingleNode("./span");
                 //image_links.Add(link.GetAttributeValue("span", ""));
-                Console.WriteLine(link.GetAttributeValue("span", "default"));
+                Console.WriteLine(aux.InnerText); 
+                //Console.WriteLine(link.GetAttributeValue("span", "default"));
+
+                HtmlNode tipo = link.SelectSingleNode(".//a");
+                Console.WriteLine(tipo.InnerText);
+
             }
         }
     }
